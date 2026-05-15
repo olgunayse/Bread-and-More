@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bread and More — Home Baked with Love</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Crimson+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FBF6EE;
+    --warm-white: #FDF9F4;
+    --parchment: #F0E6D3;
+    --toast: #C9945A;
+    --crust: #8B5E3C;
+    --dark-crust: #5C3A1E;
+    --sesame: #D4A55A;
+    --sourdough: #E8C89A;
+    --char: #2C1810;
+    --ink: #3D2314;
+    --muted: #7A5C44;
+    --smoke: #BFA98C;
+    --leaf: #5C7A4A;
+    --red-accent: #B44C3A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* ── TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(251, 246, 238, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(139, 94, 60, 0.15);
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dark-crust);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-logo span { color: var(--toast); font-style: italic; }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--dark-crust); }
+
+  .cart-btn {
+    background: var(--dark-crust);
+    color: var(--cream);
+    border: none;
+    padding: 0.5rem 1.3rem;
+    border-radius: 30px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s;
+  }
+
+  .cart-btn:hover { background: var(--crust); }
+
+  .cart-count {
+    background: var(--sesame);
+    color: var(--dark-crust);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 92vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem 5rem 5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--toast);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    color: var(--dark-crust);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title em { color: var(--toast); }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: var(--muted);
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--dark-crust);
+    color: var(--cream);
+    border: none;
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--crust); transform: translateY(-1px); }
+
+  .btn-outline {
+    border: 1.5px solid var(--crust);
+    color: var(--crust);
+    padding: 0.85rem 1.8rem;
+    border-radius: 50px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.05rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .btn-outline:hover { background: var(--crust); color: var(--cream); }
+
+  .hero-badge {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .badge-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--sesame);
+    border-radius: 50%;
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-illustration {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Big decorative SVG illustration for hero */
+  .hero-art {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  section { position: relative; z-index: 1; }
+
+  .section-label {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--toast);
+    text-align: center;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--dark-crust);
+    text-align: center;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 500px;
+    margin: 0 auto 3.5rem;
+    line-height: 1.8;
+  }
+
+  /* ── MENU / PRODUCTS ── */
+  #menu {
+    padding: 6rem 4rem;
+    background: var(--warm-white);
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .product-card {
+    background: var(--cream);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(139, 94, 60, 0.12);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(92, 58, 30, 0.12);
+  }
+
+  .product-art {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-art-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .product-emoji {
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    font-size: 5.5rem;
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--sesame);
+    color: var(--dark-crust);
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .product-body {
+    padding: 1.4rem 1.6rem 1.6rem;
+  }
+
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--dark-crust);
+    margin-bottom: 0.4rem;
+  }
+
+  .product-desc {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+
+  .product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .product-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--dark-crust);
+  }
+
+  .product-price span {
+    font-size: 0.8rem;
+    color: var(--smoke);
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+  }
+
+  .add-btn {
+    background: var(--dark-crust);
+    color: var(--cream);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .add-btn:hover { background: var(--toast); transform: scale(1.08); }
+
+  /* ── ABOUT ── */
+  #about {
+    padding: 6rem 4rem;
+    background: var(--parchment);
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about-visual {
+    aspect-ratio: 4/5;
+    background: var(--sourdough);
+    border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-content .label {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--toast);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .about-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: var(--dark-crust);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-content p {
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+  }
+
+  .about-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(139, 94, 60, 0.2);
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--toast);
+    display: block;
+  }
+
+  .stat-label {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.88rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── ORDER FORM ── */
+  #order {
+    padding: 6rem 4rem;
+    background: var(--warm-white);
+  }
+
+  .order-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--cream);
+    border-radius: 24px;
+    border: 1px solid rgba(139, 94, 60, 0.15);
+    overflow: hidden;
+  }
+
+  .order-header {
+    background: var(--dark-crust);
+    padding: 2.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .order-header::after {
+    content: '🧺';
+    position: absolute;
+    right: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 4rem;
+    opacity: 0.25;
+  }
+
+  .order-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+  }
+
+  .order-header p {
+    color: var(--sourdough);
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+  }
+
+  .order-body {
+    padding: 2.5rem 3rem;
+  }
+
+  .cart-summary {
+    background: var(--parchment);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    min-height: 80px;
+  }
+
+  .cart-empty {
+    text-align: center;
+    color: var(--smoke);
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    font-style: italic;
+    padding: 0.5rem;
+  }
+
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(139, 94, 60, 0.1);
+    font-size: 0.95rem;
+  }
+
+  .cart-item:last-child { border-bottom: none; }
+
+  .cart-item-name { color: var(--ink); }
+
+  .cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .qty-btn {
+    background: var(--sourdough);
+    border: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-crust);
+    transition: background 0.15s;
+  }
+
+  .qty-btn:hover { background: var(--toast); color: white; }
+
+  .cart-item-price { color: var(--toast); font-family: 'Playfair Display', serif; min-width: 60px; text-align: right; }
+
+  .cart-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1.5px solid rgba(139, 94, 60, 0.2);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--dark-crust);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group.full { grid-column: 1 / -1; }
+
+  label {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.88rem;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  input, select, textarea {
+    background: var(--warm-white);
+    border: 1.5px solid rgba(139, 94, 60, 0.2);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--toast);
+  }
+
+  textarea { resize: vertical; min-height: 100px; }
+
+  .pickup-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .pickup-option {
+    border: 1.5px solid rgba(139, 94, 60, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--warm-white);
+  }
+
+  .pickup-option.selected {
+    border-color: var(--toast);
+    background: rgba(201, 148, 90, 0.08);
+  }
+
+  .pickup-option input[type="radio"] { display: none; }
+
+  .pickup-icon { font-size: 1.5rem; }
+
+  .pickup-text strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--dark-crust);
+    font-family: 'Playfair Display', serif;
+  }
+
+  .pickup-text small {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--dark-crust);
+    color: var(--cream);
+    border: none;
+    padding: 1.1rem;
+    border-radius: 50px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 0.5rem;
+  }
+
+  .submit-btn:hover { background: var(--crust); transform: translateY(-1px); }
+
+  /* ── SUCCESS MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(44, 24, 16, 0.6);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--cream);
+    border-radius: 24px;
+    padding: 3rem;
+    max-width: 440px;
+    text-align: center;
+    animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .modal-emoji { font-size: 4rem; margin-bottom: 1rem; }
+
+  .modal h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--dark-crust);
+    margin-bottom: 0.75rem;
+  }
+
+  .modal p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark-crust);
+    color: var(--sourdough);
+    padding: 4rem;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+
+  .footer-logo span { color: var(--sesame); font-style: italic; }
+
+  footer p {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    color: var(--sourdough);
+    line-height: 1.9;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    margin: 1.5rem 0;
+  }
+
+  .footer-links a {
+    color: var(--sourdough);
+    text-decoration: none;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.92rem;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--sesame); }
+
+  .footer-divider {
+    border: none;
+    border-top: 1px solid rgba(212, 165, 90, 0.2);
+    margin: 2rem auto;
+    max-width: 300px;
+  }
+
+  /* ── SCROLL ANIMATION ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── SCROLL BANNER ── */
+  .scroll-banner {
+    background: var(--toast);
+    overflow: hidden;
+    padding: 0.75rem 0;
+    white-space: nowrap;
+  }
+
+  .scroll-track {
+    display: inline-flex;
+    animation: scrollLeft 20s linear infinite;
+    gap: 0;
+  }
+
+  .scroll-item {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream);
+    padding: 0 2rem;
+  }
+
+  .scroll-sep { color: var(--sesame); }
+
+  @keyframes scrollLeft {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 300px; }
+    .hero-left { padding: 3rem 2rem; }
+    #menu, #order { padding: 4rem 1.5rem; }
+    #about { grid-template-columns: 1fr; padding: 4rem 2rem; }
+    .about-visual { max-width: 260px; margin: 0 auto; }
+    .form-grid { grid-template-columns: 1fr; }
+    .order-body { padding: 1.5rem; }
+    .order-header { padding: 1.8rem 1.5rem; }
+    footer { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Bread <span>&amp; More</span></div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#order">Order</a></li>
+  </ul>
+  <button class="cart-btn" onclick="scrollToOrder()">
+    🧺 Basket <span class="cart-count" id="cartCount">0</span>
+  </button>
+</nav>
+
+<!-- SCROLLING BANNER -->
+<div class="scroll-banner">
+  <div class="scroll-track" id="scrollTrack"></div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">✦ Home Bakery · Est. 2019</p>
+    <h1 class="hero-title">
+      Baked with<br>
+      <em>warmth</em> &amp;<br>
+      tradition
+    </h1>
+    <p class="hero-sub">
+      From our kitchen to your table. Authentic Turkish simit, long-fermented sourdough, and seasonal breads — crafted with love and the finest ingredients.
+    </p>
+    <div class="hero-ctas">
+      <a href="#menu" class="btn-primary">Browse our menu</a>
+      <a href="#order" class="btn-outline">Place an order</a>
+    </div>
+    <div class="hero-badge">
+      <div class="badge-item"><div class="badge-dot"></div>Naturally leavened</div>
+      <div class="badge-item"><div class="badge-dot"></div>Baked fresh daily</div>
+      <div class="badge-item"><div class="badge-dot"></div>No preservatives</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <svg class="hero-art" viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+      <rect width="600" height="700" fill="#E8C89A"/>
+      <!-- Warm background waves -->
+      <ellipse cx="300" cy="750" rx="450" ry="300" fill="#D4A55A" opacity="0.3"/>
+      <ellipse cx="500" cy="100" rx="200" ry="200" fill="#C9945A" opacity="0.15"/>
+      <!-- Table surface -->
+      <rect x="80" y="420" width="440" height="280" rx="20" fill="#8B5E3C" opacity="0.12"/>
+      <!-- Simit ring (large, centered at top) -->
+      <g transform="translate(300, 220)">
+        <!-- outer ring -->
+        <circle cx="0" cy="0" r="120" fill="none" stroke="#8B5E3C" stroke-width="38" opacity="0.9"/>
+        <!-- sesame texture dots -->
+        <circle cx="0" cy="-120" r="3.5" fill="#F0E6D3"/>
+        <circle cx="35" cy="-114" r="3" fill="#F0E6D3"/>
+        <circle cx="68" cy="-96" r="3.5" fill="#F0E6D3"/>
+        <circle cx="96" cy="-69" r="3" fill="#F0E6D3"/>
+        <circle cx="114" cy="-35" r="3.5" fill="#F0E6D3"/>
+        <circle cx="120" cy="0" r="3" fill="#F0E6D3"/>
+        <circle cx="114" cy="35" r="3.5" fill="#F0E6D3"/>
+        <circle cx="96" cy="69" r="3" fill="#F0E6D3"/>
+        <circle cx="68" cy="96" r="3.5" fill="#F0E6D3"/>
+        <circle cx="35" cy="114" r="3" fill="#F0E6D3"/>
+        <circle cx="0" cy="120" r="3.5" fill="#F0E6D3"/>
+        <circle cx="-35" cy="114" r="3" fill="#F0E6D3"/>
+        <circle cx="-68" cy="96" r="3.5" fill="#F0E6D3"/>
+        <circle cx="-96" cy="69" r="3" fill="#F0E6D3"/>
+        <circle cx="-114" cy="35" r="3.5" fill="#F0E6D3"/>
+        <circle cx="-120" cy="0" r="3" fill="#F0E6D3"/>
+        <circle cx="-114" cy="-35" r="3.5" fill="#F0E6D3"/>
+        <circle cx="-96" cy="-69" r="3" fill="#F0E6D3"/>
+        <circle cx="-68" cy="-96" r="3.5" fill="#F0E6D3"/>
+        <circle cx="-35" cy="-114" r="3" fill="#F0E6D3"/>
+        <!-- golden glaze highlight -->
+        <circle cx="0" cy="0" r="120" fill="none" stroke="#D4A55A" stroke-width="8" opacity="0.4"/>
+        <!-- hole -->
+        <circle cx="0" cy="0" r="48" fill="#E8C89A"/>
+      </g>
+      <!-- Sourdough loaf -->
+      <g transform="translate(160, 500)">
+        <!-- loaf body -->
+        <ellipse cx="0" cy="0" rx="95" ry="70" fill="#C9945A"/>
+        <ellipse cx="0" cy="-5" rx="95" ry="65" fill="#A0652A"/>
+        <!-- scoring slashes -->
+        <line x1="-40" y1="-30" x2="0" y2="10" stroke="#7A4A1A" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="0" y1="-30" x2="40" y2="10" stroke="#7A4A1A" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- crust top -->
+        <ellipse cx="0" cy="-5" rx="88" ry="30" fill="#8B5E3C" opacity="0.5"/>
+        <!-- ear/bloom -->
+        <path d="M -30,-35 Q 0,-65 30,-35" fill="none" stroke="#5C3A1E" stroke-width="3" stroke-linecap="round"/>
+      </g>
+      <!-- Sliced bread -->
+      <g transform="translate(430, 490)">
+        <rect x="-50" y="-60" width="100" height="110" rx="14" fill="#D4A55A"/>
+        <rect x="-50" y="-60" width="100" height="30" rx="14" fill="#8B5E3C" opacity="0.7"/>
+        <!-- crumb holes -->
+        <circle cx="-15" cy="10" r="8" fill="#E8C89A" opacity="0.7"/>
+        <circle cx="18" cy="20" r="6" fill="#E8C89A" opacity="0.7"/>
+        <circle cx="-5" cy="35" r="10" fill="#E8C89A" opacity="0.7"/>
+        <circle cx="22" cy="-5" r="7" fill="#E8C89A" opacity="0.7"/>
+        <circle cx="-28" cy="30" r="5" fill="#E8C89A" opacity="0.7"/>
+      </g>
+      <!-- Tea glass -->
+      <g transform="translate(300, 530)">
+        <path d="M -18,-40 L -22,40 L 22,40 L 18,-40 Z" fill="#C9945A" opacity="0.2" stroke="#8B5E3C" stroke-width="1.5"/>
+        <path d="M -18,-40 L 18,-40" stroke="#8B5E3C" stroke-width="1.5"/>
+        <!-- tea color inside -->
+        <path d="M -17,-30 L -21,38 L 21,38 L 17,-30 Z" fill="#8B4513" opacity="0.35"/>
+        <!-- rim highlight -->
+        <ellipse cx="0" cy="-40" rx="18" ry="5" fill="#D4A55A" opacity="0.5"/>
+        <!-- handle -->
+        <path d="M 18,0 Q 38,0 38,15 Q 38,30 18,30" fill="none" stroke="#8B5E3C" stroke-width="2"/>
+      </g>
+      <!-- Wheat sprigs -->
+      <g transform="translate(80, 380)" opacity="0.5">
+        <line x1="0" y1="60" x2="0" y2="-20" stroke="#8B5E3C" stroke-width="1.5"/>
+        <ellipse cx="-6" cy="30" rx="5" ry="12" fill="#C9945A" transform="rotate(-20, -6, 30)"/>
+        <ellipse cx="6" cy="15" rx="5" ry="12" fill="#C9945A" transform="rotate(20, 6, 15)"/>
+        <ellipse cx="-5" cy="0" rx="5" ry="12" fill="#C9945A" transform="rotate(-15, -5, 0)"/>
+        <ellipse cx="0" cy="-18" rx="4" ry="10" fill="#C9945A"/>
+      </g>
+      <g transform="translate(520, 400)" opacity="0.5">
+        <line x1="0" y1="60" x2="0" y2="-20" stroke="#8B5E3C" stroke-width="1.5"/>
+        <ellipse cx="-6" cy="30" rx="5" ry="12" fill="#C9945A" transform="rotate(-20, -6, 30)"/>
+        <ellipse cx="6" cy="15" rx="5" ry="12" fill="#C9945A" transform="rotate(20, 6, 15)"/>
+        <ellipse cx="-5" cy="0" rx="5" ry="12" fill="#C9945A" transform="rotate(-15, -5, 0)"/>
+        <ellipse cx="0" cy="-18" rx="4" ry="10" fill="#C9945A"/>
+      </g>
+      <!-- Decorative dots -->
+      <circle cx="100" cy="100" r="4" fill="#8B5E3C" opacity="0.2"/>
+      <circle cx="500" cy="300" r="5" fill="#8B5E3C" opacity="0.15"/>
+      <circle cx="150" cy="600" r="3" fill="#8B5E3C" opacity="0.2"/>
+    </svg>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <p class="section-label">✦ Fresh Daily</p>
+  <h2 class="section-title">Our Baked Goods</h2>
+  <p class="section-subtitle">Everything baked in small batches, using traditional methods and the finest local ingredients.</p>
+
+  <div class="product-grid" id="productGrid">
+    <!-- Products injected by JS -->
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div style="background: var(--parchment);">
+<div id="about">
+  <div class="about-visual fade-up">
+    <svg viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+      <rect width="300" height="380" fill="#E8C89A"/>
+      <!-- Kitchen window -->
+      <rect x="80" y="30" width="140" height="160" rx="10" fill="#A0D8EF" opacity="0.4" stroke="#8B5E3C" stroke-width="2"/>
+      <line x1="150" y1="30" x2="150" y2="190" stroke="#8B5E3C" stroke-width="1.5"/>
+      <line x1="80" y1="110" x2="220" y2="110" stroke="#8B5E3C" stroke-width="1.5"/>
+      <!-- Curtains -->
+      <path d="M80,30 Q100,80 80,130" fill="#C9945A" opacity="0.5"/>
+      <path d="M220,30 Q200,80 220,130" fill="#C9945A" opacity="0.5"/>
+      <!-- Windowsill plant -->
+      <rect x="120" y="185" width="60" height="10" rx="3" fill="#8B5E3C" opacity="0.6"/>
+      <ellipse cx="150" cy="175" rx="22" ry="18" fill="#5C7A4A" opacity="0.8"/>
+      <ellipse cx="135" cy="180" rx="12" ry="10" fill="#5C7A4A"/>
+      <ellipse cx="165" cy="178" rx="14" ry="12" fill="#5C7A4A"/>
+      <!-- Counter/table -->
+      <rect x="30" y="250" width="240" height="15" rx="6" fill="#8B5E3C" opacity="0.6"/>
+      <!-- Big bowl with dough -->
+      <ellipse cx="105" cy="250" rx="50" ry="30" fill="#D4A55A" opacity="0.8"/>
+      <ellipse cx="105" cy="240" rx="48" ry="18" fill="#E8C89A"/>
+      <!-- Simit on counter -->
+      <g transform="translate(210, 240)">
+        <circle cx="0" cy="0" r="30" fill="none" stroke="#8B5E3C" stroke-width="10"/>
+        <circle cx="0" cy="0" r="30" fill="none" stroke="#D4A55A" stroke-width="3" opacity="0.5"/>
+        <circle cx="0" cy="0" r="14" fill="#E8C89A"/>
+      </g>
+      <!-- Rolling pin -->
+      <rect x="40" y="300" width="140" height="12" rx="6" fill="#A0652A"/>
+      <rect x="40" y="302" width="30" height="8" rx="4" fill="#8B5E3C"/>
+      <rect x="150" y="302" width="30" height="8" rx="4" fill="#8B5E3C"/>
+      <!-- Flour dusting -->
+      <circle cx="60" cy="330" r="15" fill="white" opacity="0.25"/>
+      <circle cx="160" cy="345" r="10" fill="white" opacity="0.2"/>
+      <circle cx="230" cy="320" r="12" fill="white" opacity="0.18"/>
+    </svg>
+  </div>
+
+  <div class="about-content fade-up" style="transition-delay: 0.15s">
+    <span class="label">✦ Our Story</span>
+    <h2>A little kitchen with a big heart</h2>
+    <p>
+      Bread and More started as a weekend passion — simit rings warming on the stone, sourdough starters bubbling on the counter, the kitchen filled with the scent of toasted sesame and crusty bread.
+    </p>
+    <p>
+      The name says it all. Every loaf carries a piece of that warmth — slow-fermented doughs, hand-shaped rings, nothing rushed. Just bread made the way it should be, and always a little something more.
+    </p>
+    <p>
+      We bake on Thursdays and Fridays for weekend collection, and take orders up to 48 hours in advance so every piece arrives fresh from the oven.
+    </p>
+    <div class="about-stats">
+      <div>
+        <span class="stat-num">72h</span>
+        <span class="stat-label">sourdough ferment</span>
+      </div>
+      <div>
+        <span class="stat-num">100%</span>
+        <span class="stat-label">natural ingredients</span>
+      </div>
+      <div>
+        <span class="stat-num">6am</span>
+        <span class="stat-label">daily bake start</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ORDER FORM -->
+<section id="order">
+  <p class="section-label">✦ Order Online</p>
+  <h2 class="section-title">Place Your Order</h2>
+  <p class="section-subtitle">Add items from the menu above, then fill in your details. We'll confirm within a few hours.</p>
+
+  <div class="order-wrapper fade-up">
+    <div class="order-header">
+      <h2>Your Basket</h2>
+      <p>Collection or local delivery available</p>
+    </div>
+    <div class="order-body">
+
+      <div class="cart-summary" id="cartSummary">
+        <p class="cart-empty" id="cartEmpty">Your basket is empty — add something delicious above ✦</p>
+        <div id="cartItems"></div>
+        <div class="cart-total" id="cartTotal" style="display:none">
+          <span>Total</span>
+          <span id="totalPrice">£0.00</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1.5rem;">
+        <p style="font-family:'Crimson Pro',serif; font-size:0.88rem; letter-spacing:0.05em; color:var(--muted); text-transform:uppercase; margin-bottom:0.75rem;">Fulfilment</p>
+        <div class="pickup-options">
+          <label class="pickup-option selected" id="opt-collection" onclick="selectPickup('collection')">
+            <input type="radio" name="pickup" value="collection" checked>
+            <span class="pickup-icon">🚶</span>
+            <div class="pickup-text">
+              <strong>Collection</strong>
+              <small>Free · Plano, TX</small>
+            </div>
+          </label>
+          <label class="pickup-option" id="opt-delivery" onclick="selectPickup('delivery')">
+            <input type="radio" name="pickup" value="delivery">
+            <span class="pickup-icon">🚲</span>
+            <div class="pickup-text">
+              <strong>Local Delivery</strong>
+              <small>+$4 · 3 mile radius</small>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" id="firstName" placeholder="Ada" />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" id="lastName" placeholder="Lovelace" />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="ada@example.com" />
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" id="phone" placeholder="+1 (555) 000-0000" />
+        </div>
+        <div class="form-group full">
+          <label>Preferred Collection / Delivery Date</label>
+          <input type="date" id="orderDate" />
+        </div>
+        <div class="form-group full">
+          <label>Notes (allergies, special requests)</label>
+          <textarea id="notes" placeholder="e.g. nut allergy, extra sesame on simit, gift wrapping…"></textarea>
+        </div>
+      </div>
+
+      <button class="submit-btn" onclick="submitOrder()">Place Order — Pay on Collection 🍞</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Bread <span>&amp; More</span></div>
+  <ul class="footer-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#order">Order</a></li>
+    <li><a href="mailto:hello@breadandmore.co">Contact</a></li>
+  </ul>
+  <hr class="footer-divider">
+  <p>Baked with ♥ in Plano, Texas<br>
+  Orders by Thu · Collection Fri–Sat · hello@breadandmore.co</p>
+  <p style="margin-top:1rem;font-size:0.8rem;opacity:0.5;">© 2025 Bread and More Home Bakery</p>
+</footer>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <div class="modal-emoji">🎉</div>
+    <h3>Order Received!</h3>
+    <p>Thank you, <span id="modalName">friend</span>! We'll confirm your order by email within a few hours. Your bread will be baked fresh on the morning of collection.</p>
+    <button class="btn-primary" onclick="closeModal()">Back to the bakery</button>
+  </div>
+</div>
+
+<script>
+const products = [
+  {
+    id: 1,
+    name: 'Classic Simit',
+    desc: 'Golden sesame rings with a crisp crust and chewy crumb — a true Istanbul morning staple.',
+    price: 2.50,
+    unit: 'each',
+    badge: 'Bestseller',
+    bg: '#D4A55A',
+    emoji: '🥯',
+    category: 'simit'
+  },
+  {
+    id: 2,
+    name: 'Simit Half Dozen',
+    desc: 'Six freshly baked simit rings, perfect for sharing or stocking up for the week.',
+    price: 13.50,
+    unit: 'per 6',
+    bg: '#C9945A',
+    emoji: '🥯',
+    category: 'simit'
+  },
+  {
+    id: 3,
+    name: 'Sourdough Country Loaf',
+    desc: 'Long-fermented 72-hour sourdough with an open crumb, crackly crust, and deep flavour.',
+    price: 9.00,
+    unit: '800g loaf',
+    badge: 'Signature',
+    bg: '#A0652A',
+    emoji: '🍞',
+    category: 'sourdough'
+  },
+  {
+    id: 4,
+    name: 'Seeded Sourdough',
+    desc: 'Our country loaf loaded with sunflower, pumpkin & linseed for extra crunch and nutrition.',
+    price: 10.00,
+    unit: '850g loaf',
+    bg: '#8B5E3C',
+    emoji: '🍞',
+    category: 'sourdough'
+  },
+  {
+    id: 5,
+    name: 'Cheese & Za'atar Simit',
+    desc: 'Weekend special: sesame rings filled with salty white cheese and fragrant za'atar herb blend.',
+    price: 3.50,
+    unit: 'each',
+    badge: 'Special',
+    bg: '#B8945A',
+    emoji: '🧀',
+    category: 'simit'
+  },
+  {
+    id: 6,
+    name: 'Sourdough Focaccia',
+    desc: 'Pillowy, olive-oil-drenched focaccia with rosemary and flaky sea salt. Seasonal toppings vary.',
+    price: 7.50,
+    unit: 'half tray',
+    bg: '#C8A060',
+    emoji: '🫓',
+    category: 'sourdough'
+  }
+];
+
+const cart = {};
+
+function renderProducts() {
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = products.map(p => `
+    <div class="product-card fade-up">
+      <div class="product-art" style="background:${p.bg}20;">
+        <div class="product-art-bg" style="background:linear-gradient(135deg,${p.bg}30,${p.bg}60);"></div>
+        <span class="product-emoji">${p.emoji}</span>
+        ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">${p.name}</h3>
+        <p class="product-desc">${p.desc}</p>
+        <div class="product-footer">
+          <div class="product-price">
+            $${p.price.toFixed(2)}
+            <span>/ ${p.unit}</span>
+          </div>
+          <button class="add-btn" onclick="addToCart(${p.id})" title="Add to basket">+</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  observeFadeUps();
+}
+
+function addToCart(id) {
+  cart[id] = (cart[id] || 0) + 1;
+  updateCart();
+  const btn = event.target;
+  btn.textContent = '✓';
+  btn.style.background = 'var(--leaf)';
+  setTimeout(() => { btn.textContent = '+'; btn.style.background = ''; }, 800);
+}
+
+function changeQty(id, delta) {
+  cart[id] = Math.max(0, (cart[id] || 0) + delta);
+  if (cart[id] === 0) delete cart[id];
+  updateCart();
+}
+
+function updateCart() {
+  const total = Object.entries(cart).reduce((sum, [id, qty]) => {
+    const p = products.find(p => p.id === +id);
+    return sum + p.price * qty;
+  }, 0);
+
+  const count = Object.values(cart).reduce((a, b) => a + b, 0);
+  document.getElementById('cartCount').textContent = count;
+
+  const itemsEl = document.getElementById('cartItems');
+  const emptyEl = document.getElementById('cartEmpty');
+  const totalEl = document.getElementById('cartTotal');
+
+  if (count === 0) {
+    emptyEl.style.display = 'block';
+    itemsEl.innerHTML = '';
+    totalEl.style.display = 'none';
+  } else {
+    emptyEl.style.display = 'none';
+    totalEl.style.display = 'flex';
+    document.getElementById('totalPrice').textContent = '$' + total.toFixed(2);
+
+    itemsEl.innerHTML = Object.entries(cart).map(([id, qty]) => {
+      const p = products.find(p => p.id === +id);
+      return `
+        <div class="cart-item">
+          <span class="cart-item-name">${p.emoji} ${p.name}</span>
+          <div class="cart-item-controls">
+            <button class="qty-btn" onclick="changeQty(${id}, -1)">−</button>
+            <span style="font-family:'Playfair Display',serif;min-width:16px;text-align:center;">${qty}</span>
+            <button class="qty-btn" onclick="changeQty(${id}, 1)">+</button>
+            <span class="cart-item-price">$${(p.price * qty).toFixed(2)}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+}
+
+function selectPickup(type) {
+  document.getElementById('opt-collection').classList.toggle('selected', type === 'collection');
+  document.getElementById('opt-delivery').classList.toggle('selected', type === 'delivery');
+}
+
+function submitOrder() {
+  const name = document.getElementById('firstName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  if (!name || !email) { alert('Please enter your name and email address.'); return; }
+  const count = Object.values(cart).reduce((a, b) => a + b, 0);
+  if (count === 0) { alert('Please add at least one item to your basket first!'); return; }
+  document.getElementById('modalName').textContent = name;
+  document.getElementById('successModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('successModal').classList.remove('open');
+  Object.keys(cart).forEach(k => delete cart[k]);
+  updateCart();
+}
+
+function scrollToOrder() {
+  document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Scrolling banner
+const items = ['Hand-shaped simit', '72h sourdough', 'Baked fresh daily', 'No preservatives', 'Sesame & za\'atar', 'Local & seasonal', 'Naturally leavened', 'Made with love'];
+const track = document.getElementById('scrollTrack');
+const repeated = [...items, ...items];
+track.innerHTML = repeated.map((t, i) =>
+  `<span class="scroll-item">${t}</span><span class="scroll-sep scroll-item">✦</span>`
+).join('');
+
+// Scroll animations
+function observeFadeUps() {
+  const els = document.querySelectorAll('.fade-up');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(el => obs.observe(el));
+}
+
+// Set min date to today + 2 days
+const minDate = new Date();
+minDate.setDate(minDate.getDate() + 2);
+document.getElementById('orderDate').min = minDate.toISOString().split('T')[0];
+
+renderProducts();
+observeFadeUps();
+</script>
+</body>
+</html>
